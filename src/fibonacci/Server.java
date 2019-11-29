@@ -5,11 +5,11 @@ import java.math.BigInteger;
 import it.unipr.sowide.actodes.actor.Behavior;
 import it.unipr.sowide.actodes.actor.CaseFactory;
 import it.unipr.sowide.actodes.actor.MessageHandler;
-import it.unipr.sowide.actodes.actor.Shutdown;
-import it.unipr.sowide.actodes.registry.Reference;
-import it.unipr.sowide.actodes.service.naming.content.Bind;
-import it.unipr.sowide.actodes.service.naming.content.Lookup;
-import it.unipr.sowide.actodes.service.naming.content.Subscribe;
+//import it.unipr.sowide.actodes.actor.Shutdown;
+//import it.unipr.sowide.actodes.registry.Reference;
+//import it.unipr.sowide.actodes.service.naming.content.Bind;
+//import it.unipr.sowide.actodes.service.naming.content.Lookup;
+//import it.unipr.sowide.actodes.service.naming.content.Subscribe;
 
 
 public final class Server extends Behavior
@@ -24,8 +24,6 @@ public final class Server extends Behavior
 			return BigInteger.valueOf(0);
 		if (n == 1)
 			return BigInteger.valueOf(1);
-
-		// if n >= 2, do the following
 
 		BigInteger a = BigInteger.valueOf(0);
 		BigInteger b = BigInteger.valueOf(1);
@@ -44,22 +42,27 @@ public final class Server extends Behavior
   @Override
   public void cases(final CaseFactory c)
   {
-	  System.out.println("Server avviato");
+	  //System.out.println("Server avviato");
 	  MessageHandler k = (m) -> {
-		  System.out.println("Server riceve il messaggio dal client contenente "+ m.getContent());
+		  System.out.println("SERVER: ricevo il messaggio dal client contenente "+ m.getContent());
 	      y=(int) m.getContent();
-	      System.out.println(y);
 	      //Calcolo Fibonacci
 	      z=fibonacci(y);
-		  System.out.println("Server: il numero di Fibonacci di " +y+" è: "+z);
-	      return null;
-	    };
+		  System.out.println("SERVER: il numero di Fibonacci di " +y+" è "+z);
+		  
+		  System.out.println("SERVER: invio al client del risultato");
 
+		  send(m.getReceiver(), z);
+	      
+		  return null;
+	    };
+	    
+	    
 	    MessageHandler l = (m) -> {
 	      onReceive(ACCEPTALL, k);
 	      return null;
 	    };
-
+	    
 	    c.define(START, l);
 	 
   }

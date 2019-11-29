@@ -24,19 +24,8 @@ import it.unipr.sowide.actodes.service.naming.Namer;
 
 public final class Initiator extends Builder
 {
-  private long time;
 
-  /**
-   * Class constructor.
-   *
-   * @param t  the server bootstrap time.
-   *
-  **/
-  public Initiator(final long t)
-  {
-    this.time = t;
-  }
-
+ 
   /** {@inheritDoc} **/
   @Override
   public void build(final Executor<? extends Actor> e)
@@ -55,7 +44,6 @@ public final class Initiator extends Builder
   **/
   public static void main(final String[] v)
   {
-    final long t = 1;
 
     Configuration c =  SpaceInfo.INFO.getConfiguration();
 
@@ -66,7 +54,7 @@ public final class Initiator extends Builder
 
     c.addWriter(new ConsoleWriter());
 
-    c.setExecutor(new OldScheduler(new Initiator(t)));
+    c.setExecutor(new OldScheduler(new Initiator()));
 
     c.start();
   }
