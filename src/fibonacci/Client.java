@@ -49,9 +49,8 @@ public final class Client extends Behavior
     MessageHandler g = (m) -> {
     	if (m.getContent() instanceof BigInteger) {
             System.out.println("CLIENT: ricevo il risultato "+m.getContent());
+            System.out.println("CLIENT: SHUTDOWN");
             return Shutdown.SHUTDOWN; 
-            
-            
     	}
         return null;
 	  };

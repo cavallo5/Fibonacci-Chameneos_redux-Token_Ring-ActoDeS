@@ -1,0 +1,7 @@
+Elenco bug:
+
+Elenco funzioni da aggiungere:
+-Sistemare conteggio client per output leggibile
+-Manager dei client
+-File di output con numero e risultato 
+

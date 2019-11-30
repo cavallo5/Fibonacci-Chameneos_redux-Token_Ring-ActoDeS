@@ -24,13 +24,17 @@ import it.unipr.sowide.actodes.service.naming.Namer;
 
 public final class Initiator extends Builder
 {
-
+  int nclient=10;
  
   /** {@inheritDoc} **/
   @Override
   public void build(final Executor<? extends Actor> e)
   {
-    e.actor(new Client());
+	  
+	for(int i=0; i<nclient; i++){
+	    e.actor(new Client()); //10 client
+
+	}
     e.actor(new Server());
   }
 
