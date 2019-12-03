@@ -6,8 +6,8 @@ public class Memoria {
 	int numeroclient=10;
 	String numero;
 	String risultato;
-	//String[] elapsedtime;
-	//float tempototale;
+	String elapsedtime;
+	long tempototale;
 	
 	public Memoria(){
 		this.numero="";
@@ -21,12 +21,25 @@ public class Memoria {
 	public String getrisultato() {
 		return this.risultato;
 	}
+	public String getelapsedtime() {
+		return this.elapsedtime;
+	}
+	public long gettempototale() {
+		return this.tempototale;
+	}
 	public void setnumero(String a) {
 		this.numero=a;
 	}
 	public void setrisultato(String a) {
 		this.risultato=a;
 	}
+	public void setelapsedtime(String a) {
+		this.elapsedtime=a;
+	}
+	public void settempototale(long a) {
+		this.tempototale=a;
+	}
+	
 	
 
 

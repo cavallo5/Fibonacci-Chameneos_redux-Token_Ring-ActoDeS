@@ -1,6 +1,0 @@
-Elenco bug:
-
-Elenco funzioni da aggiungere:
--Manager dei client (quasi finito)
--File di output con numero e risultato 
-
