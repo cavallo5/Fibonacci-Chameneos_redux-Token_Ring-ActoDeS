@@ -24,7 +24,7 @@ import it.unipr.sowide.actodes.service.naming.Namer;
 
 public final class Initiator extends Builder
 {
-  int nclient=10;
+  private int nclient=10;
  
   /** {@inheritDoc} **/
   @Override
@@ -36,6 +36,7 @@ public final class Initiator extends Builder
 
 	}
     e.actor(new Server());
+    e.actor(new Manager());
   }
 
   /**
@@ -56,7 +57,7 @@ public final class Initiator extends Builder
     c.setFilter(Logger.ACTIONS);
     //c.setLogFilter(new NoCycleProcessing());
 
-    c.addWriter(new ConsoleWriter());
+    //c.addWriter(new ConsoleWriter());
 
     c.setExecutor(new OldScheduler(new Initiator()));
 

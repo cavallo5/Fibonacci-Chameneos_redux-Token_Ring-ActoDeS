@@ -48,32 +48,45 @@ public final class Server extends Behavior
   @Override
   public void cases(final CaseFactory c)
   {
-	  //System.out.println("Server avviato");
+	  
+	  
+	  //Invio al server di x
 	  MessageHandler k = (m) -> {
-		  //System.out.println(m.getSender());
-		  System.out.println("SERVER: ricevo il messaggio dal client contenente "+ m.getContent());
-	      y=(int) m.getContent();
-	      //Calcolo Fibonacci
-	      z=fibonacci(y);
-		  System.out.println("SERVER: il numero di Fibonacci di " +y+" è "+z);
-		  
-		  System.out.println("SERVER: invio al client del risultato");
-
-		  send(m.getSender(), z);
-		  
-		  i++;
-		  if(i==(getnclient())) {
-			  System.out.println("SERVER: SHUTDOWN");
-			  return Shutdown.SHUTDOWN;
-		  }
-	      
-		 
+		  System.out.println("Il server si dichiara ai client");
+		  send(APP, "SERVER");		  
 		  return null;
-	    };
-	    
-	      
+	  };
+
+	 
+    c.define(START, k);
+	  
+	  
+	  //System.out.println("Server avviato");
+	  MessageHandler g = (m) -> {
+		  
+		  if (m.getContent() instanceof Number) {		  
+			  //System.out.println(m.getSender());
+			  System.out.println("SERVER: ricevo il messaggio dal client contenente "+ m.getContent());
+		      y=(int) m.getContent();
+		      //Calcolo Fibonacci
+		      z=fibonacci(y);
+			  System.out.println("SERVER: il numero di Fibonacci di " +y+" è "+z);
+			  
+			  System.out.println("SERVER: invio al client del risultato");
+
+			  send(m.getSender(), z);
+			  
+			  i++;
+			  if(i==(getnclient())) {
+				  System.out.println("SERVER: SHUTDOWN");
+				  return Shutdown.SHUTDOWN;
+			  }
+		  }
+		  return null;
+	  };
+		  
 		 
-		c.define(ACCEPTALL, k);
+		c.define(ACCEPTALL, g);
 	    
 	    
   }
