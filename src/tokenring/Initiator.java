@@ -55,7 +55,7 @@ public final class Initiator extends Builder
     c.setFilter(Logger.ACTIONS);
     //c.setLogFilter(new NoCycleProcessing());
 
-    c.addWriter(new ConsoleWriter());
+    //c.addWriter(new ConsoleWriter());
 
     c.setExecutor(new OldScheduler(new Initiator()));
 

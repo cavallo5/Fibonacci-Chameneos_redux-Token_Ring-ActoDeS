@@ -15,4 +15,7 @@ public class Token {
 	public void setcontatore(int a) {
 		this.contatore=a;
 	}
+	public void incrementatoken() {
+		this.contatore++;
+	}
 }
