@@ -29,6 +29,7 @@ public final class Nodo extends Behavior
   private int M=500; //Numero client
   int x=0;
   Token token;
+  long end_time, time_used=0;
 
   
   
@@ -98,7 +99,7 @@ public final class Nodo extends Behavior
 			System.out.println("ID destinatario scelto:" +x);
 			token=(Token) m.getContent();
 			this.token.incrementatoken();
-			pacchetto=new Pacchetto(this.memoria.getID(), x, token);
+			pacchetto=new Pacchetto(this.memoria.getID(), x, token,System.nanoTime());
 			System.out.println("NODO "+this.memoria.getID()+": invio il pacchetto al nodo successivo "+this.getindirizzo_nodosuccessivo());
 			send(this.getindirizzo_nodosuccessivo(),pacchetto);
 			
@@ -117,6 +118,11 @@ public final class Nodo extends Behavior
 			//SE IL PACCHETTO E' ARRIVATO A DESTINAZIONE
 			if(pacchetto.getID_destinatario()==this.memoria.getID()) {
 				System.out.println("NODO "+this.memoria.getID()+": pacchetto arrivato a destinazione");
+	            end_time= System.nanoTime(); //tempo in ns dopo aver che il messaggio è arrivato a destinazione
+	            time_used= (long) ((end_time - this.pacchetto.getstart_time())/1000F); //tempo impiegato in 􏱇µs tra invio e risposta del server
+				System.out.println("TEMPO IMPIEGATO PER INVIARE IL PACCHETTO: "+time_used+"");
+	            
+
 				//SE IL TOKEN HA RAGGIUNTO T PASSI, NON FARE LA SEND, ALTRIMENTI FAI LA SEND AL NODO SUCCESSIVO
 				//Il token deve continuare a girare
 				if(!pacchetto.gettoken().controllapassi()) { //RESTITUISCE TRUE SE HA RAGGIUNTO IL LIMITE DI PASSI

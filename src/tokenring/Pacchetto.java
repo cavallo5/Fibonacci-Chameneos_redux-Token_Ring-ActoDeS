@@ -17,13 +17,16 @@ public class Pacchetto {
 	private Integer ID_destinatario;
 	private String messaggio;
 	private Token token;
+	long start_time;
+
 	
 	
-	public Pacchetto(Integer a, Integer b,Token c){
+	public Pacchetto(Integer a, Integer b,Token c, long d){
 		this.ID_mittente=a;
 		this.ID_destinatario=b;
 		this.messaggio="Hello";
 		this.token=c;
+		this.start_time=d;
 	}
 	
 	public Integer getID_mittente() {
@@ -37,6 +40,9 @@ public class Pacchetto {
 	}
 	public Token gettoken() {
 		return this.token;
+	}
+	public long getstart_time() {
+		return this.start_time;
 	}
 	
 
