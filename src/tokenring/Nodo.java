@@ -26,7 +26,7 @@ public final class Nodo extends Behavior
   Reference indirizzo_gestore;
   private Memoria memoria; //contiene ID e indirizzo
   Pacchetto pacchetto;
-  private int M=3;
+  private int M=500; //Numero client
   int x=0;
   Token token;
 
@@ -67,7 +67,7 @@ public final class Nodo extends Behavior
     	//Arriva messaggio di inizializzazione dal gestore
     	if (m.getContent()=="GESTORE") {
     		this.indirizzo_gestore=m.getSender();
-			System.out.println("NODO: Indirizzo gestore: "+this.indirizzo_gestore+"");
+			//System.out.println("NODO: Indirizzo gestore: "+this.indirizzo_gestore+"");
 			
 			//mando al Gestore il mio ID e il mio indirizzo
 			 send(this.indirizzo_gestore, memoria);		  
@@ -87,10 +87,13 @@ public final class Nodo extends Behavior
     	if (m.getContent() instanceof Token) {
 			System.out.println("NODO "+this.memoria.getID()+": ho ricevuto il TOKEN");
 			//Scelta casuale destinatario 
-    	    x = (int)(Math.random()*M +1);
+    	    x = (int)(Math.random()*M +1); //Tra 1 e M
     	    //Caso in cui sceglie se stesso come destinatario
     	    if(x==this.memoria.getID()) {
     	    	x++;
+    	    	if(x==(M+1)){
+    	    		x=1;
+    	    	}
     	    }
 			System.out.println("ID destinatario scelto:" +x);
 			token=(Token) m.getContent();
@@ -99,8 +102,6 @@ public final class Nodo extends Behavior
 			System.out.println("NODO "+this.memoria.getID()+": invio il pacchetto al nodo successivo "+this.getindirizzo_nodosuccessivo());
 			send(this.getindirizzo_nodosuccessivo(),pacchetto);
 			
-
-    		
 			return null;	
     	}
     	
@@ -112,19 +113,39 @@ public final class Nodo extends Behavior
 			System.out.println("INDIRIZZO DESTINATARIO: "+pacchetto.getID_destinatario());
 			System.out.println("MESSAGGIO: "+pacchetto.getmessaggio());
 
+			
+			//SE IL PACCHETTO E' ARRIVATO A DESTINAZIONE
 			if(pacchetto.getID_destinatario()==this.memoria.getID()) {
 				System.out.println("NODO "+this.memoria.getID()+": pacchetto arrivato a destinazione");
+				//SE IL TOKEN HA RAGGIUNTO T PASSI, NON FARE LA SEND, ALTRIMENTI FAI LA SEND AL NODO SUCCESSIVO
+				//Il token deve continuare a girare
+				if(!pacchetto.gettoken().controllapassi()) { //RESTITUISCE TRUE SE HA RAGGIUNTO IL LIMITE DI PASSI
+					System.out.println("TOKEN PASSA AL NODO SUCCESSIVO");
+					send(this.indirizzo_nodosuccessivo, pacchetto.gettoken());
+				}
+				else {
+					System.out.println("TOKEN HA TERMINATO I PASSI");
+				}
+				//send(this.indirizzo_nodosuccessivo, pacchetto.gettoken());
+				
 			}else {
+				//SE IL PACCHETTO NON E' ARRIVATO A DESTINAZIONE
 				System.out.println("NODO "+this.memoria.getID()+": pacchetto non arrivato a destinazione");
-				System.out.println("NODO "+this.memoria.getID()+": invio del pacchetto al nodo ricevuto");
-				send(this.getindirizzo_nodosuccessivo(),pacchetto);
-			}
+				if(!pacchetto.gettoken().controllapassi()) { //RESTITUISCE TRUE SE HA RAGGIUNTO IL LIMITE DI PASSI
+					System.out.println("TOKEN PASSA AL NODO SUCCESSIVO");
+					send(this.getindirizzo_nodosuccessivo(),pacchetto);
+				}
+				else {
+					System.out.println("IL TOKEN HA RAGGIUNTO IL LIMITE DI PASSI");
+					
+					
+					 		  
 
+				}
+			}
     	}
     	
     	
-    	
-  
         return null;
 	  };
     

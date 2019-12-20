@@ -24,6 +24,7 @@ import it.unipr.sowide.actodes.service.naming.Namer;
 
 public final class Initiator extends Builder
 {
+	int numeronodi=500;
  
   /** {@inheritDoc} **/
   @Override
@@ -31,10 +32,16 @@ public final class Initiator extends Builder
   {
 	//Mettere quello che voglio creare all'inizio, suppongo la Token Ring
 	  	e.actor(new Gestore());
+	  	
+	  	for(int i=1;i<=numeronodi;i++) {
+	  		e.actor(new Nodo(i));
+	  	}
+	  	/*
+	  	
 	    e.actor(new Nodo(1)); 
 	    e.actor(new Nodo(2));
 	    e.actor(new Nodo(3));
-	
+	    */
   }
 
   /**

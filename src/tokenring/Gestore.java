@@ -20,8 +20,8 @@ public final class Gestore extends Behavior
   Hashtable<Integer, Reference> h = new Hashtable<Integer, Reference>();
   Memoria memoria_gestore=new Memoria();
   int i=0; //contatore client
-  private int num_nodi=3; //numero di nodi
-  private int num_token=2; //numero di token
+  private int num_nodi=500; //numero di nodi
+  private int num_token=10; //numero di token
   private int token_assegnati=0; //token assegnati
   public Token token;
   public int w;
@@ -91,8 +91,8 @@ public final class Gestore extends Behavior
 				  System.out.println("HASHTABLE RIEMPITA");
 				  System.out.println("Valori nella hash " + h);	  
 				  //INVIO INDIRIZZO NODO SUCCESSIVO --- CICLICO
-				  for(int j=1;j<=getnum_nodi();j++) { //j:1-2-3
-					  if(j!=3) {
+				  for(int j=1;j<=getnum_nodi();j++) { //j:1-2-3-...30
+					  if(j!=getnum_nodi()) {
 						  System.out.println("GESTORE: sto mandando a "+h.get(j)+" la reference del nodo successivo " +h.get(j+1));
 						  send(h.get(j), h.get(j+1)); //Invio al nodo i-esimo, la reference del nodo i+1-esimo
 					  }
@@ -101,12 +101,12 @@ public final class Gestore extends Behavior
 						  send(h.get(j), h.get(1)); //All'ultimo nodo, mando la reference del primo nodo
 					  }
 				  }
+				  //Dopo che la rete è stata creata, genero i token
 				  
-				  GenerazioneToken();
-
-
-
-				  
+				  for(int j=0;j<num_token;j++) {
+					  GenerazioneToken();
+				  }
+				  return Shutdown.SHUTDOWN;
 			  }
 			  
 		  }
