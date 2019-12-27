@@ -28,6 +28,8 @@ public final class Chameneos extends Behavior{
 	Reference indirizzocharmeneosincontrato;
 	Reference indirizzocentrocommerciale;
 	int x=0;
+	long start_time, end_time, time_used=0;
+
 	
 	
 	//public Chameneos(IdChameneos id , Colore c, int d) 
@@ -87,7 +89,8 @@ public final class Chameneos extends Behavior{
 			  return null;
 		  };
 
-		 
+        start_time=System.nanoTime(); //tempo in ns
+        System.out.println(start_time);
 	    c.define(START, k);
 
 	    MessageHandler g = (m) -> {
@@ -115,6 +118,9 @@ public final class Chameneos extends Behavior{
 					send(this.indirizzocentrocommerciale, coloreA);	
 	    		}else {
 	    			Messaggio("vado a dormire");
+	                end_time= System.nanoTime(); //tempo in ns dopo aver ricevuto la risposta del server
+	                time_used= (long) ((end_time - start_time)/1000F); //tempo impiegato in 􏱇µs tra invio e risposta del server
+	               Messaggio("ho impiegato: "+time_used+" ns");
 	    			return Shutdown.SHUTDOWN;
 	    		}
 	    	}

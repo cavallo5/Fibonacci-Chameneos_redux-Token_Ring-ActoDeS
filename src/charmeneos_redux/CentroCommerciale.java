@@ -20,7 +20,7 @@ public final class CentroCommerciale extends Behavior{
 	Integer numero_chameneos; //numero chameneos nel centro commerciale
 	int x,y;
 	Reference ChameneosA, ChameneosB;
-	//int [] casuali = {0,1,2,3,4,5,6};
+	static int chameneos_totali=6; //numero charmeneos
 
 
 
@@ -30,19 +30,42 @@ public final class CentroCommerciale extends Behavior{
 	//int numero_chameneos; //numero chameneox nel centro commerciale
 	//Reference ChameneosA, ChameneosB;
 
-	 
-	  
-	  /** {@inheritDoc} **/
-	  @Override
-	  public void cases(final CaseFactory c)
-	  {
-		  MessageHandler k = (m) -> {
-			  this.numero_chameneos=0;
-			  System.out.println("IL CENTRO COMMERCIALE E' APERTO");
-			  send(APP, "CENTROCOMMERCIALE_APERTO");		  
-			  return null;
-			  
-	  };
+	public int primochameneos() {
+		//Scelta primo chameneos
+		Boolean cham1=false;
+		while(!cham1) {
+			x=(int)(Math.random()*6); //Numero casuale da 0 a 6
+			if(h.containsKey(x)) {
+				cham1=true;
+			}
+		}
+		return x;
+	}
+	
+	public int secondochameneos(int x) {
+		//Scelta secondo chameneos
+		Boolean cham2=false;
+		while(!cham2) {
+			y=(int)(Math.random()*6); //Numero casuale da 0 a 6
+			if(h.containsKey(y) && y!=x) {
+				cham2=true;
+			}
+		}
+		return y;
+	}
+	
+	
+	
+	/** {@inheritDoc} **/
+	@Override
+	public void cases(final CaseFactory c)
+	{
+		MessageHandler k = (m) -> {
+		this.numero_chameneos=0;
+		System.out.println("IL CENTRO COMMERCIALE E' APERTO");
+		send(APP, "CENTROCOMMERCIALE_APERTO");		  
+		return null;
+	};
 
 	    c.define(START, k);
 		  
@@ -56,27 +79,29 @@ public final class CentroCommerciale extends Behavior{
 	      		h.put(numero_chameneos,(Reference)m.getSender());
 	      		numero_chameneos++; //uno chameneos nel centro commerciale		
 	      	}
-	      	if(numero_chameneos==6) {
+	      	if(numero_chameneos==chameneos_totali) {
 	      		System.out.println("TUTTI GLI CHAMENEOS SONO VENUTI NEL CENTRO COMMERCIALE");
 	      		while(h.size()!=0) {
-	      			x=(int)(Math.random()*6); //Numero casuale da 0 a 6
-	      			y=(int)(Math.random()*6); //Numero casuale da 0 a 6
-	      			if(h.containsKey(x) && h.containsKey(y) && x!=y) {
-	      					System.out.println("Ricerca elemento "+x+" nell'hashtable");
-	      					System.out.println("Ricerca elemento "+y+" nell'hashtable");
+	      			x=primochameneos();
+	      			y=secondochameneos(x);
+	      			System.out.println("DIO: "+x);
+	      			System.out.println("GESU"+y);
 
-	      					ChameneosA=h.get(x);
-	      					ChameneosB=h.get(y);
-	      					send(ChameneosA,ChameneosB);
-	      					send(ChameneosB,ChameneosA);
-	      					h.remove(x);
-	      					h.remove(y);
-	      					numero_chameneos--;
-	      					numero_chameneos--;
+	      			//x=(int)(Math.random()*6); //Numero casuale da 0 a 6
+	      			//y=(int)(Math.random()*6); //Numero casuale da 0 a 6
+	      			//if(h.containsKey(x) && h.containsKey(y) && x!=y) {
+	      			ChameneosA=h.get(x);
+	      			ChameneosB=h.get(y);
+	      			send(ChameneosA,ChameneosB);
+	      			send(ChameneosB,ChameneosA);
+	      			h.remove(x);
+	      			h.remove(y);
+	      			numero_chameneos--;
+	      			numero_chameneos--;
 
-	      				}
-	    		System.out.println("La dimensione dell'hash table è: "+h.size());
-	            System.out.println("The set is: " + h.toString()); 
+	      	//}
+	      			System.out.println("La dimensione dell'hash table è: "+h.size());
+	      			System.out.println("The set is: " + h.toString()); 
 	      		}
 	      	}
 	      	
