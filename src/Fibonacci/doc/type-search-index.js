@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"fibonacci","l":"Client"},{"p":"fibonacci","l":"Initiator"},{"p":"fibonacci","l":"Manager"},{"p":"fibonacci","l":"Memoria"},{"p":"fibonacci","l":"Server"}]
