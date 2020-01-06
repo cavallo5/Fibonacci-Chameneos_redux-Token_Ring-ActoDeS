@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"tokenring","l":"Gestore"},{"p":"tokenring","l":"Initiator"},{"p":"tokenring","l":"Memoria"},{"p":"tokenring","l":"Nodo"},{"p":"tokenring","l":"Pacchetto"},{"p":"tokenring","l":"Token"}]
