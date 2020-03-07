@@ -2,7 +2,6 @@ package chameneos_redux;
 
 /**
  * Comportamento dello chameneos 
- * @author Vincenzo Cavallo, Malamine Liviano D’Arcangelo Koumare
  */
 
 //Librerie utilizzate

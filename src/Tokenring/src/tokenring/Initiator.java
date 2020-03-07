@@ -2,7 +2,6 @@ package tokenring;
 
 /**
  * Initiator 
- * @author Vincenzo Cavallo, Malamine Liviano D’Arcangelo Koumare
  */
 
 import it.unipr.sowide.actodes.actor.Actor;

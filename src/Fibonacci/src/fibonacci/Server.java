@@ -2,7 +2,6 @@ package fibonacci;
 
 /**
  * Server che si occupa di calcolare il numero di Fibonacci
- * @author Vincenzo Cavallo, Malamine Liviano D’Arcangelo Koumare
  *
  */
 //Librerie importate

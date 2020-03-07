@@ -2,7 +2,6 @@ package fibonacci;
 
 /**
  * Manager che si occupa di generare il file di output
- * @author Vincenzo Cavallo, Malamine Liviano D’Arcangelo Koumare
  *
  */
 

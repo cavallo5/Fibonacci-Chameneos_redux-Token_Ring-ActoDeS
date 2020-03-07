@@ -2,7 +2,6 @@ package tokenring;
 
 /**
  * Memoria
- * @author Vincenzo Cavallo, Malamine Liviano D’Arcangelo Koumare
  *
  */
 import it.unipr.sowide.actodes.registry.Reference;

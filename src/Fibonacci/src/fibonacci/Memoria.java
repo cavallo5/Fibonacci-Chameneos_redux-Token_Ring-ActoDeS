@@ -2,7 +2,6 @@ package fibonacci;
 
 /**
  * Memoria per incapsulare i dati
- * @author Vincenzo Cavallo, Malamine Liviano D’Arcangelo Koumare
  *
  */
 

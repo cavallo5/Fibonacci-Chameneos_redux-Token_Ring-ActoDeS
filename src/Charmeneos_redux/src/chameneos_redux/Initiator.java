@@ -2,7 +2,6 @@ package chameneos_redux;
 
 /**
  * Initiator 
- * @author Vincenzo Cavallo, Malamine Liviano D’Arcangelo Koumare
  */
 
 //Librerie importate

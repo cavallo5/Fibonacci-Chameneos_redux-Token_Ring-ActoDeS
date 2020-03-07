@@ -2,7 +2,6 @@ package tokenring;
 
 /**
  * Gestore 
- * @author Vincenzo Cavallo, Malamine Liviano D’Arcangelo Koumare
  */
 
 import tokenring.Token;

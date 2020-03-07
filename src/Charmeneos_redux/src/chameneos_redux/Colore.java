@@ -2,7 +2,6 @@ package chameneos_redux;
 
 /**
  * Colore
- * @author Vincenzo Cavallo, Malamine Liviano D’Arcangelo Koumare
  *
  */
 

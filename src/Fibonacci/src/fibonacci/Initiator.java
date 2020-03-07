@@ -2,7 +2,6 @@ package fibonacci;
 
 /**
  * Initiator 
- * @author Vincenzo Cavallo, Malamine Liviano D’Arcangelo Koumare
  */
 //Librerie importate
 import it.unipr.sowide.actodes.actor.Actor;
